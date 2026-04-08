@@ -1,0 +1,12 @@
+# Python cache/virtual env artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+
