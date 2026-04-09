@@ -25,6 +25,7 @@ Primary verified sources used for this reference:
 
 - `C:/GameDev/Dark-Ship-Codex/game.json`
 - `C:/GameDev/Dark-Ship-Codex/layouts/main.json`
+- `C:/GameDev/AI-Playground/AI Playground.json` (Text object validation capture, 2026-04-09)
 
 ## Container Structure
 
@@ -149,6 +150,14 @@ Minimum practical template:
 }
 ```
 
+Validation Notes (2026-04-09 AI-Playground capture):
+
+- Confirmed serialized keys in a scene-level `TextObject::Text` object:
+  `name`, `type`, `variables`, `behaviors`, `string`, `font`,
+  `characterSize`, `bold`, `italic`, `underlined`, `smoothed`, `color`.
+- Not present in this capture (treat as optional/variant):
+  `assetStoreId`, `effects`, `textAlignment`, `content`.
+
 Resource rule: `font` must match a font resource `name` in
 `game.json -> resources.resources`.
 
@@ -185,3 +194,4 @@ Observed object-specific fields:
   GDevelop editor output first, then extend this file.
 - Keep object `name` unique within the target container.
 - Use `references/instances.md` separately when placing the object in scenes.
+
