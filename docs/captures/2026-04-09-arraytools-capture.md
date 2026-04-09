@@ -32,6 +32,16 @@ This means:
 - There are no behavior modifiers to capture for this extension.
 - Coverage can be metadata-first using export function definitions.
 
+Additional parity evidence:
+
+- Official documentation includes technical notes for internal JSON type names
+  and hidden/internal parameter slots:
+  - https://wiki.gdevelop.io/gdevelop5/extensions/array-tools/
+- Real project JSON confirms scene-level serialized `type.value` forms such as:
+  - `ArrayTools::AppendAll`
+  - `ArrayTools::HasString`
+  - `ArrayTools::Shift`
+
 ## Sampling Strategy (Large Extension)
 
 Use minimal JSON spot-checking instead of complete examples:

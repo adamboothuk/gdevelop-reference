@@ -23,6 +23,28 @@ Coverage status: `Capturing` (metadata-first).
 - Function names and parameter signatures below are extracted from export metadata.
 - Serialized `type.value` forms in scene JSON still need a small spot-check sample set.
 
+## Documentation Parity Notes
+
+- The official docs page includes technical notes with:
+  - internal JSON `type.value` names
+  - internal/hidden parameter slots (for example `parameters 0, N` handled by GDevelop)
+- This complements export metadata and helps explain why some serialized arrays
+  include leading/trailing placeholder entries.
+
+Source:
+- https://wiki.gdevelop.io/gdevelop5/extensions/array-tools/
+
+Current project evidence (Dark-Ship-Codex):
+- Scene-level serialized forms observed in real JSON:
+  - `ArrayTools::AppendAll`
+  - `ArrayTools::HasString`
+  - `ArrayTools::Shift`
+
+Practical rule:
+- Treat export metadata as the primary catalog/signature source.
+- Use docs technical notes to annotate hidden/internal parameter positions and
+  confirm exact JSON `type.value` naming patterns.
+
 ## Function Catalog
 
 ### Global variables/Array access
