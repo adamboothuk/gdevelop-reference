@@ -170,6 +170,11 @@ Observed object-specific fields:
 - `leftMargin`, `rightMargin`, `topMargin`, `bottomMargin`
 - `tiled`
 
+Panel rendering rule:
+
+- Set `tiled: true` when the border/center regions should repeat instead of stretch.
+- Use this for repeating or patterned panel art to avoid visual distortion.
+
 ### Panel Sprite Button (`type: "PanelSpriteButton::PanelSpriteButton"`)
 
 Observed object-specific fields:
