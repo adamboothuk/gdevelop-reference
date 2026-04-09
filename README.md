@@ -31,6 +31,12 @@ ask for a verified example from the GDevelop editor or source.
   Detailed reference docs by category (instances, scene, variables, time, etc.).
 - `scripts/validate-instances.ps1`  
   Validation helper for scene/external-layout instance JSON edits.
+- `docs/extension-support-workflow.md`  
+  Repeatable process for adding extension coverage safely over time.
+- `docs/extension-targets.md`  
+  Living backlog/status tracker for extension coverage targets.
+- `docs/extension-capture-template.md`  
+  Fill-in template for collecting verified extension metadata before writing references.
 
 ## Validation Helper
 
@@ -67,3 +73,11 @@ To work around the lack of console log access you might consider creating a cust
 
 <!-- Add your custom notes below -->
 
+## Extension Coverage Workflow
+
+If you want to add support for Common Extension features (for example `Sticker`,
+`Smooth camera`, `ArrayTools`) over time, use:
+
+- [Workflow Guide](docs/extension-support-workflow.md)
+- [Target Tracker](docs/extension-targets.md)
+- [Capture Template](docs/extension-capture-template.md)

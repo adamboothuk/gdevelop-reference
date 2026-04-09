@@ -431,6 +431,17 @@ Use this table to decide which file to open next.
 | Generic variables, arrays, structures, legacy scene/global forms | `references/variables.md` |
 | Scene timers, time scale, wait action, time expressions | `references/time.md` |
 | Event types, control flow, conversions, external layouts | `references/scene-logic.md` |
+| Extension-specific instructions (for example Sticker, Smooth camera, ArrayTools) | `references/extensions/README.md` |
+
+## Extension Coverage Notes
+
+Extension references are maintained incrementally under `references/extensions/`.
+
+If an extension entry does not exist yet:
+
+1. Say coverage is missing.
+2. Ask for a verified editor/source example.
+3. Track the extension in `docs/extension-targets.md` before adding docs.
 
 ## Maintenance Guidance
 
