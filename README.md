@@ -29,6 +29,8 @@ ask for a verified example from the GDevelop editor or source.
   Main skill instructions, safety rules, event JSON structure, and category index.
 - `references/`  
   Detailed reference docs by category (instances, scene, variables, time, etc.).
+- `references/behaviors.md`  
+  Behavior attachment reference: verified behavior `type` strings, JSON shape, and compatibility/caution tags.
 - `scripts/validate-instances.ps1`  
   Validation helper for scene/external-layout instance JSON edits.
 - `docs/extension-support-workflow.md`  

@@ -41,15 +41,17 @@ When writing or editing GDevelop JSON:
 3. For object definitions: open `references/objects.md` first and validate
    type templates, baseline fields, and resource dependencies before editing
    `objects` entries.
-4. For instances: open `references/instances.md` first and validate field names,
+4. For behavior attachment: open `references/behaviors.md` when adding/removing
+   object behaviors or scene `behaviorsSharedData`.
+5. For instances: open `references/instances.md` first and validate field names,
    defaults, and optional attributes before editing placement data.
-5. Never drop required fields (`name`, `x`, `y`, `zOrder`, `layer`, `angle`,
+6. Never drop required fields (`name`, `x`, `y`, `zOrder`, `layer`, `angle`,
    `customSize`, `width`, `height`, `persistentUuid`) when writing instances.
-6. For manual scene edits, run `scripts/validate-instances.ps1` before
+7. For manual scene edits, run `scripts/validate-instances.ps1` before
    finalizing.
-7. For relational event conditions, include the operator (`>=`, `=`, `<`,
+8. For relational event conditions, include the operator (`>=`, `=`, `<`,
    etc.) as a parameter.
-8. If the task is niche or category-specific, open only the matching file under
+9. If the task is niche or category-specific, open only the matching file under
    `references/`.
 
 ## JSON Event Structure
@@ -213,6 +215,13 @@ Open `references/objects.md` when the task touches:
 - selecting a baseline object template by `type` (for example `Sprite`, `TextObject::Text`)
 - wiring object resources (image/font names used by object content)
 - object-level defaults and safe fields to preserve (`variables`, `effects`, `behaviors`)
+
+Open `references/behaviors.md` when the task touches:
+
+- adding or removing object behaviors in JSON
+- updating scene `behaviorsSharedData`
+- behavior type lookup for JSON (`type` values like `Tween::TweenBehavior`)
+- compatibility checks (`Incompatible with object`) and caution tags (`Experimental`, `Deprecated`)
 
 ### Capabilities
 
@@ -433,6 +442,7 @@ Use this table to decide which file to open next.
 | Need | File |
 |------|------|
 | Project/scene `objects` schema, type templates, and resource-linking rules | `references/objects.md` |
+| Object behavior attachment, type identifiers, compatibility/caution tagging | `references/behaviors.md` |
 | Scene or external layout `instances` schema, required fields, defaults, compatibility notes | `references/instances.md` |
 | Base object actions, timers, variables, deprecated aliases | `references/base-object.md` |
 | Animation capability details and examples | `references/animatable.md` |
