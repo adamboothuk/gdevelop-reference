@@ -26,6 +26,7 @@ Primary verified sources used for this reference:
 - `C:/GameDev/Dark-Ship-Codex/game.json`
 - `C:/GameDev/Dark-Ship-Codex/layouts/main.json`
 - `C:/GameDev/AI-Playground/AI Playground.json` (Text object validation capture, 2026-04-09)
+- `C:/GameDev/AI-Playground/AI Playground.json` (Tilemap validation capture, 2026-04-09)
 
 ## Container Structure
 
@@ -181,6 +182,51 @@ Observed object-specific fields:
 
 - `variant`
 - `content` (padding and label defaults)
+
+### Tilemap (`type: "TileMap::SimpleTileMap"`)
+
+Observed object-specific fields:
+
+- `content.atlasImage`
+- `content.rowCount`
+- `content.columnCount`
+- `content.tileSize`
+- `content.tilesWithHitBox`
+
+Verified object template (scene-level):
+
+```json
+{
+  "assetStoreId": "",
+  "name": "TestTileMap",
+  "type": "TileMap::SimpleTileMap",
+  "variables": [],
+  "effects": [],
+  "behaviors": [],
+  "content": {
+    "atlasImage": "asset_store/TileMap - General - Mid - 64px.png",
+    "rowCount": 4,
+    "columnCount": 16,
+    "tileSize": 64,
+    "tilesWithHitBox": ""
+  }
+}
+```
+
+Verified instance linkage rule:
+
+- Tile layout is stored per instance in `stringProperties` with
+  `name: "tilemap"` and a JSON-string value.
+- Example 1x1 instance payload:
+  `{"tileWidth":64,"tileHeight":64,"dimX":1,"dimY":1,"layers":[{"id":0,"alpha":1,"tiles":[[1]]}]}`
+
+Caution note:
+
+- Treat Tilemap as editor-managed content. The Tilemap Painter panel can rewrite
+  serialized map payloads, so manual JSON edits should be kept minimal and then
+  validated in GDevelop before wider reuse.
+- Do not flatten object tilemap fields at the root level; keep them under
+  `content` for `TileMap::SimpleTileMap`.
 
 ## Object Creation Workflow (Safe)
 
