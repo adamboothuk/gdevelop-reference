@@ -209,6 +209,7 @@ Open `references/objects.md` when the task touches:
 
 - creating a new object definition in `game.json` (`objects`)
 - creating or editing scene-local object definitions in `layouts/<scene>.json` (`objects`)
+- choosing scope: scene-local by default vs global only for deliberate cross-scene reuse
 - selecting a baseline object template by `type` (for example `Sprite`, `TextObject::Text`)
 - wiring object resources (image/font names used by object content)
 - object-level defaults and safe fields to preserve (`variables`, `effects`, `behaviors`)

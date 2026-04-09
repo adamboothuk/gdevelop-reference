@@ -7,11 +7,19 @@ project and scene JSON files.
 
 Use this file when editing:
 
-- `game.json` -> `objects` (project/global objects)
-- `layouts/<scene>.json` -> `objects` (scene-local objects)
+- `game.json` -> `objects` (project/global objects, shared across scenes)
+- `layouts/<scene>.json` -> `objects` (scene-local objects, preferred default)
 
 This file is for object definitions, not object placement. For placement in a
 scene, use `references/instances.md`.
+
+Default scope rule:
+
+- Prefer scene-local objects first.
+- Use global objects only when an object is intentionally reused across
+  multiple scenes.
+- Avoid promoting to global too early, because moving global back to scene-local
+  is not supported directly in GDevelop.
 
 Primary verified sources used for this reference:
 
@@ -163,11 +171,12 @@ Observed object-specific fields:
 ## Object Creation Workflow (Safe)
 
 1. Choose the target container: project `objects` or scene `objects`.
-2. Choose a verified template matching your desired `type`.
-3. Set a unique `name`.
-4. Verify resource references used by the object exist in `resources.resources`.
-5. Keep `variables`, `effects`, and `behaviors` arrays present.
-6. If cloning an existing object, preserve unknown fields unless intentionally changing them.
+2. Default to scene `objects` unless cross-scene reuse is required.
+3. Choose a verified template matching your desired `type`.
+4. Set a unique `name`.
+5. Verify resource references used by the object exist in `resources.resources`.
+6. Keep `variables`, `effects`, and `behaviors` arrays present.
+7. If cloning an existing object, preserve unknown fields unless intentionally changing them.
 
 ## Safety Rules
 
