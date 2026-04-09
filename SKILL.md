@@ -1,12 +1,13 @@
 ---
 name: gdevelop-reference
 description: >
-  GDevelop game engine reference for actions, conditions, expressions, and
-  scene instance JSON.
+  GDevelop game engine reference for actions, conditions, expressions,
+  object-definition JSON, and scene instance JSON.
   Use this skill whenever the user is working with GDevelop scene JSON files,
   asking about GDevelop event syntax, looking up the correct internal name for
   an action/condition/expression, asking how to structure parameters in a
-  GDevelop event, editing object placement in a scene `instances` array, or
+  GDevelop event, creating or editing object definitions in project/scene
+  `objects` arrays, editing object placement in a scene `instances` array, or
   debugging GDevelop JSON. This skill prevents guessing at internal identifiers
   and instance schema fields - always consult it before writing any GDevelop
   event or instance JSON. Trigger on any mention of GDevelop, .json scene
@@ -17,13 +18,16 @@ description: >
 # GDevelop Reference Skill
 
 This skill provides authoritative reference data for GDevelop's built-in
-object actions, conditions, expressions, and scene/external-layout instance
-JSON, extracted from GDevelop source.
+object actions, conditions, expressions, project/scene object definitions, and
+scene/external-layout instance JSON, extracted from GDevelop source and
+verified project captures.
 
 ## Critical Rule
 
-Never guess an internal identifier or scene instance field.
-If a needed action, condition, expression, or instance attribute is not listed
+Never guess an internal identifier, object-definition field, or scene instance
+field.
+If a needed action, condition, expression, object attribute, or instance
+attribute is not listed
 in this skill or its reference files, say so explicitly and ask the user to
 provide a verified example from GDevelop's editor or source.
 
@@ -31,17 +35,21 @@ provide a verified example from GDevelop's editor or source.
 
 When writing or editing GDevelop JSON:
 
-1. Decide whether the task is `events` work or `instances` work.
+1. Decide whether the task is `events`, `objects`, or `instances` work.
 2. For events: identify the event family first, then look up exact instruction
    identifiers and parameter order.
-3. For instances: open `references/instances.md` first and validate field names,
+3. For object definitions: open `references/objects.md` first and validate
+   type templates, baseline fields, and resource dependencies before editing
+   `objects` entries.
+4. For instances: open `references/instances.md` first and validate field names,
    defaults, and optional attributes before editing placement data.
-4. Never drop required fields (`name`, `x`, `y`, `zOrder`, `layer`, `angle`,
+5. Never drop required fields (`name`, `x`, `y`, `zOrder`, `layer`, `angle`,
    `customSize`, `width`, `height`, `persistentUuid`) when writing instances.
-5. For manual scene edits, run `scripts/validate-instances.ps1` before finalizing.
-6. For relational event conditions, include the operator (`>=`, `=`, `<`, etc.)
-   as a parameter.
-7. If the task is niche or category-specific, open only the matching file under
+6. For manual scene edits, run `scripts/validate-instances.ps1` before
+   finalizing.
+7. For relational event conditions, include the operator (`>=`, `=`, `<`,
+   etc.) as a parameter.
+8. If the task is niche or category-specific, open only the matching file under
    `references/`.
 
 ## JSON Event Structure
@@ -194,6 +202,16 @@ Open `references/instances.md` when the task touches:
 Validation helper:
 
 - `scripts/validate-instances.ps1 -ScenePath <layout.json> [-ProjectPath <game.json>] [-Mode validate|suggest-fixes]`
+
+### Scene And Project Objects
+
+Open `references/objects.md` when the task touches:
+
+- creating a new object definition in `game.json` (`objects`)
+- creating or editing scene-local object definitions in `layouts/<scene>.json` (`objects`)
+- selecting a baseline object template by `type` (for example `Sprite`, `TextObject::Text`)
+- wiring object resources (image/font names used by object content)
+- object-level defaults and safe fields to preserve (`variables`, `effects`, `behaviors`)
 
 ### Capabilities
 
@@ -413,6 +431,7 @@ Use this table to decide which file to open next.
 
 | Need | File |
 |------|------|
+| Project/scene `objects` schema, type templates, and resource-linking rules | `references/objects.md` |
 | Scene or external layout `instances` schema, required fields, defaults, compatibility notes | `references/instances.md` |
 | Base object actions, timers, variables, deprecated aliases | `references/base-object.md` |
 | Animation capability details and examples | `references/animatable.md` |

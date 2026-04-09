@@ -58,7 +58,7 @@ With optional project context and fix suggestions:
 - Version control seems to work fine in this environment so use it. You are editing the project files directly so the client might not save you
 - After your AI tool has made an update you will need to reload the project. Use File -> Open Recent and select your current project to force a reload. Changes will then be visible and available in preview
 - There is no way for an AI tool to see the console log. This can be worked around by allowing the AI to create it's own logging system. Instruction for this is given below in ## Custom Console Logging
-- This skill has not yet been tested with creating new objects. It can work with already created objects
+- This skill now includes initial coverage for creating new objects. Use `references/objects.md` and favor verified type templates over ad-hoc fields
 - This skill works best when there is an existing project to work within. It has not been tested on setting up a completely new project. Try it and report back if you are brave
 - It is often useful to support the AI with examples. Consider creating a test scene where you can create events or objects and then copy and paste the created JSON into the prompt as a reference
 - Work in small steps. Plan, build, test. Set the scope tightly and watch for the AI wandering off. The ability to architect a game is not confirmed
