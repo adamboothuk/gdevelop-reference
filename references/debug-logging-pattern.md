@@ -3,6 +3,13 @@
 ## Purpose
 Provide a reusable logging mechanism for playtest/debug sessions where events write short messages to a variable, and a central event group persists those messages to a run-specific log file.
 
+This pattern is file-based logging:
+- `FileSystem::LoadStringFromFileAsync`
+- `FileSystem::SaveStringToFileAsync`
+
+It does not use storage actions such as `ReadStringFromStorage` or
+`EcrireFichierTxt`.
+
 ## Design Goals
 - Project-agnostic: no hardcoded scene names, object names, or state machine names.
 - Scene-agnostic: can live in a shared external event, or in any scene.
@@ -63,6 +70,71 @@ Prefer short, searchable prefixes, for example:
 - `[ROOM] Enter pause`
 - `[CAMERA] Snap to player`
 - `[HAZARD] Activated`
+
+## Verified Project Examples (Dark-Ship-Codex)
+Use these as copy-safe patterns when building events in JSON.
+
+Source evidence:
+- `C:\GameDev\Dark-Ship-Codex\layouts\run.json:14829` (`FileSystem::SaveStringToFileAsync`)
+- `C:\GameDev\Dark-Ship-Codex\layouts\run.json:14890` (`FileSystem::LoadStringFromFileAsync`)
+- `C:\GameDev\Dark-Ship-Codex\layouts\run.json:14917` (`FileSystem::SaveStringToFileAsync` append-via-rewrite)
+
+Create file with initial header:
+
+```json
+{
+  "type": { "value": "FileSystem::SaveStringToFileAsync" },
+  "parameters": [
+    "\"Log started: \" + Debug_Log_RunId",
+    "Debug_Log_FilePath",
+    "Debug_Log_Success"
+  ]
+}
+```
+
+Load existing file content before appending:
+
+```json
+{
+  "type": { "await": true, "value": "FileSystem::LoadStringFromFileAsync" },
+  "parameters": [
+    "Temp_Log_Content",
+    "Debug_Log_FilePath",
+    "",
+    ""
+  ]
+}
+```
+
+Append by rewriting full content:
+
+```json
+{
+  "type": { "value": "FileSystem::SaveStringToFileAsync" },
+  "parameters": [
+    "Temp_Log_Content + NewLine() + Debug_Log_String",
+    "Debug_Log_FilePath",
+    "Debug_Log_Success"
+  ]
+}
+```
+
+Observed project path builder:
+
+```json
+{
+  "type": { "value": "SetStringVariable" },
+  "parameters": [
+    "Debug_Log_FilePath",
+    "=",
+    "\"C:/GameDev/Dark-Ship-Codex/documents/logs/\" + Debug_Log_RunId + \".txt\""
+  ]
+}
+```
+
+Note:
+- This project uses an absolute path expression for log files.
+- For portability, prefer a project-relative pattern when possible (for example `documents/logs/run_<id>.txt`).
 
 ## Storage and VCS Rules
 Create folder and keep placeholder:

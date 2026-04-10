@@ -10,7 +10,11 @@ Extracted from `FileExtension.cpp`. Extension ID: `BuiltinFile`.
 > The source notes that spaces are forbidden in element names.
 >
 > Some load actions add `AddCodeOnlyParameter("currentScene", "")` before the
-> target variable. Do not include that internal parameter in JSON `parameters[]`.
+> target variable.
+>
+> In editor-serialized project JSON, this may still appear as an empty
+> placeholder parameter slot. Preserve the exact observed parameter order from
+> the project file when editing manually.
 
 ## Open This File When
 
@@ -18,6 +22,11 @@ Extracted from `FileExtension.cpp`. Extension ID: `BuiltinFile`.
 - the task clears, deletes, preloads, or unloads storage
 - the task checks whether a storage or storage group exists
 - the task needs the correct JSON names for `BuiltinFile`
+
+Not for debug log file append/read loops:
+- use `references/debug-logging-pattern.md` when the task is runtime log files
+  written with `FileSystem::LoadStringFromFileAsync` and
+  `FileSystem::SaveStringToFileAsync`.
 
 ## Conditions
 
@@ -64,6 +73,19 @@ Save a numeric expression:
 }
 ```
 
+Save text/JSON payload (project-verified pattern):
+
+```json
+{
+  "type": { "value": "EcrireFichierTxt" },
+  "parameters": [
+    "\"dark_ship_player_data\"",
+    "\"profile/\" + player.profiles.current_profile + \"/equipment\"",
+    "ToJSON(player.equipment_db)"
+  ]
+}
+```
+
 Load a string into a variable:
 
 ```json
@@ -72,6 +94,26 @@ Load a string into a variable:
   "parameters": ["\"Save1\"", "\"PlayerState/Name\"", "GlobalVariableString(PlayerName)"]
 }
 ```
+
+Project-verified serialized form with internal placeholder slot:
+
+```json
+{
+  "type": { "value": "ReadStringFromStorage" },
+  "parameters": [
+    "\"dark_ship_player_data\"",
+    "\"profile/current_profile_ref\"",
+    "",
+    "LoadTemp"
+  ]
+}
+```
+
+Evidence for project-verified storage snippets:
+- `C:\GameDev\Dark-Ship-Codex\layouts\data-import.json:814` (`EcrireFichierTxt`)
+- `C:\GameDev\Dark-Ship-Codex\layouts\data-import.json:872` (`EcrireFichierTxt`)
+- `C:\GameDev\Dark-Ship-Codex\layouts\data-import.json:919` (`EcrireFichierTxt`)
+- `C:\GameDev\Dark-Ship-Codex\layouts\data-import.json:1015` (`ReadStringFromStorage`)
 
 Check whether a nested path exists:
 
