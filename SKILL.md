@@ -81,6 +81,8 @@ Key formatting rules:
 - Action operators: `"="`, `"+="`, `"-="`, `"*="`, `"/="`
 - Condition operators: `"="`, `"!="`, `">"`, `">="`, `"<"`, `"<="`
 - Expressions: plain string, for example `"RandomInRange(0, 800)"`
+- BuiltinVariables parameter slots use bare variable paths (for example `run.sector`), not `Variable(...)`/`GlobalVariable(...)` wrappers by default.
+- Use legacy scene/global variable forms only when a specific instruction explicitly requires them.
 
 ## Quick Reference By Category
 
@@ -389,6 +391,7 @@ Open `references/variables.md` only when the task touches:
 - array or structure children
 - JSON that uses `BuiltinVariables`
 - hidden legacy scene/global variable instructions
+- choosing the correct variable parameter form (prefer Dark-Ship-Codex-style bare paths)
 
 ### Time
 

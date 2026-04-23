@@ -13,6 +13,23 @@ below for compatibility but should not be preferred in new JSON.
 - the task pushes, clears, or removes array entries
 - the task needs generic variable JSON rather than object variable JSON
 
+## Preferred Parameter Form (Dark-Ship-Codex Baseline)
+
+Use bare variable paths in BuiltinVariables parameter slots.
+
+- Preferred: `run.sector`, `states.run`, `data.equipment_db`, `eventq`
+- Avoid by default: `Variable(...)`, `SceneVariable(...)`, `GlobalVariable(...)`
+- Legacy scene/global instruction names remain documented for compatibility, not as
+  first choice.
+
+Evidence from `C:\GameDev\Dark-Ship-Codex`:
+
+- `layouts`, `externalEvents`, and `externalLayouts` use modern generic
+  instructions (`SetNumberVariable`, `StringVariable`, `ClearVariableChildren`,
+  `PushVariable`) with bare variable paths.
+- No matches found for `GlobalVariable(`, `VarGlobal`, or `VarScene` in those
+  gameplay JSON folders.
+
 ## Generic Variable Conditions
 
 | Type | Name | Parameters |
@@ -117,31 +134,44 @@ These are hidden and mainly relevant for compatibility or function-event-specifi
 | EXPRESSION | `GlobalVariable` | globalvar |
 | STR_EXPRESSION | `GlobalVariableString` | globalvar |
 
-## JSON Examples
+## JSON Examples (Verified From Dark-Ship-Codex)
 
-Compare a generic number variable:
+Initialize nested run variables with bare paths
+(`externalEvents/runfsm_setup.json:69`):
 
 ```json
 {
-  "type": { "value": "NumberVariable" },
-  "parameters": ["Variable(PlayerScore)", ">=", "100"]
+  "type": { "value": "SetNumberVariable" },
+  "parameters": ["run.seeds.run", "=", "ToNumber(ToString(global.seeds.core) + ToString(global.ship) + ToString(global.rank))"]
 }
 ```
 
-Append text to an array variable:
+State-machine compare with bare path
+(`externalEvents/runfsm.json:28`):
 
 ```json
 {
-  "type": { "value": "PushString" },
-  "parameters": ["Variable(Inventory)", "\"Potion\""]
+  "type": { "value": "StringVariable" },
+  "parameters": ["states.run", "=", "\"_init\""]
 }
 ```
 
-Remove a named child from a structure variable:
+Clear structure children before loading JSON
+(`layouts/data-import.json:286`):
 
 ```json
 {
-  "type": { "value": "RemoveVariableChild" },
-  "parameters": ["Variable(PlayerData)", "\"CurrentQuest\""]
+  "type": { "value": "ClearVariableChildren" },
+  "parameters": ["data.equipment_db"]
+}
+```
+
+Push a structure variable into an array variable
+(`externalEvents/roomfsm.json:4782`):
+
+```json
+{
+  "type": { "value": "PushVariable" },
+  "parameters": ["eventq", "this_event"]
 }
 ```
