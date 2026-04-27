@@ -1,10 +1,10 @@
-# Moved to Skills Mono-Repo
+# GDevelop Reference Skill for Codex
 
-This skill has moved to the public skills mono-repo:
+This repository remains available as a standalone sharing repo for the GDevelop reference skill.
+
+The same skill is also maintained in the broader skills mono-repo:
 
 https://github.com/adamboothuk/skills/tree/main/skills/gdevelop-reference
-
-This repository is retained only as a historical source and should be archived.
 
 ---
 
