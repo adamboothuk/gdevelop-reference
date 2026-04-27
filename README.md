@@ -8,8 +8,6 @@ https://github.com/adamboothuk/skills/tree/main/skills/gdevelop-reference
 
 ---
 
-# GDevelop Reference Skill for Codex
-
 This repository contains a Codex skill that provides **verified reference data**
 for GDevelop scene JSON work.
 
