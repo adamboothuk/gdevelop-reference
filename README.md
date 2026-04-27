@@ -1,3 +1,13 @@
+# Moved to Skills Mono-Repo
+
+This skill has moved to the public skills mono-repo:
+
+https://github.com/adamboothuk/skills/tree/main/skills/gdevelop-reference
+
+This repository is retained only as a historical source and should be archived.
+
+---
+
 # GDevelop Reference Skill for Codex
 
 This repository contains a Codex skill that provides **verified reference data**
@@ -20,7 +30,7 @@ or schema fields for:
 
 Never guess identifiers or instance fields.
 
-If something is not present in this skill’s references, treat it as unknown and
+If something is not present in this skill's references, treat it as unknown and
 ask for a verified example from the GDevelop editor or source.
 
 ## Repository Structure
