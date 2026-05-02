@@ -1,11 +1,13 @@
 ﻿# ArrayTools (Common Extension)
 
-Coverage status: `Capturing` (metadata-first).
+Coverage status: `Drafted` (source/wiki-backed; serialized validation pending).
 
 ## Source
 
 - Export: `C:\\GameDev\\Skills\\Extension Exports\\ArrayTools.json`
 - Capture record: `docs/captures/2026-04-09-arraytools-capture.md`
+- Reviewed source: `GDevelopApp/GDevelop-extensions/extensions/reviewed/ArrayTools.json`
+- User-facing docs: https://wiki.gdevelop.io/gdevelop5/extensions/array-tools/
 
 ## Scope Summary
 
@@ -21,7 +23,99 @@ Coverage status: `Capturing` (metadata-first).
 
 - This extension has no `eventsBasedBehaviors` and no behavior modifiers.
 - Function names and parameter signatures below are extracted from export metadata.
-- Serialized `type.value` forms in scene JSON still need a small spot-check sample set.
+- Use `ArrayTools::<FunctionName>` as the serialized `type.value` pattern for
+  actions and conditions, and `ArrayTools::<FunctionName>(...)` for expressions.
+- Serialized scene/project JSON still needs a small validation sample set before
+  this reference can be moved to `Verified`.
+
+## When To Use This Extension
+
+Use ArrayTools when a GDevelop event needs a common array operation that would
+otherwise require custom JavaScript or a multi-event loop:
+
+- searching an array for a number or string
+- checking whether an array contains a value
+- copying, combining, slicing, splicing, reversing, sorting, or shuffling arrays
+- removing the first or last child while storing the removed value
+- calculating number-array values such as sum, min, max, mean, or median
+- splitting a string into an array, or joining array children into a string
+
+Prefer built-in variable actions when the operation is a single direct child
+read/write. Prefer ArrayTools when the operation is array-wide or order-sensitive.
+Do not use ArrayTools as a substitute for choosing the correct variable scope:
+scene, global, and object variants are separate entries.
+
+## Install And Scope Guidance
+
+- The extension must be installed in the GDevelop project before its entries can
+  be used in event JSON.
+- Scene-variable functions use `variable` parameters.
+- Global-variable functions use `globalvar` parameters and have a `Global`
+  prefix.
+- Object-variable functions use `objectList` plus `objectvar` parameters and
+  have an `Object` prefix.
+- Version `3.0.0` introduced a breaking requirement that variables must be
+  declared. Confirm the target variable exists in the correct scope before using
+  these entries.
+
+## Internal Identifier Pattern
+
+Every exported entry uses the extension prefix:
+
+```text
+ArrayTools::<FunctionName>
+```
+
+Examples:
+
+| Entry | Use | Internal name |
+|---|---|---|
+| Scene action | Append all scene-array children | `ArrayTools::AppendAll` |
+| Scene condition | Array has string | `ArrayTools::HasString` |
+| Scene expression | Sum of number array | `ArrayTools::Sum(...)` |
+| Global action | Append all global-array children | `ArrayTools::GlobalAppendAll` |
+| Object action | Append all object-array children | `ArrayTools::ObjectAppendAll` |
+
+## Parameter Order Rules
+
+- The parameter order in the catalog is source-derived from the exported
+  `eventsFunctions[].parameters` arrays.
+- The official docs include technical notes for internal parameter slots handled
+  by GDevelop. Those slots can appear in serialized JSON around the visible
+  parameters.
+- For scene-variable entries, docs commonly report internal parameter `0` and a
+  trailing internal parameter after the visible parameters.
+- Object-variable entries include visible object-list parameters before each
+  related object variable.
+- Until the validation pass is complete, treat exact serialized parameter arrays
+  as `Needs serialized verification` unless a real project JSON example has
+  been captured.
+
+## Representative JSON Validation Targets
+
+Use `C:\\GameDev\\AI-Playground` to generate these examples during the validation
+pass. Capture the saved project JSON and record the exact `type.value` plus
+`parameters` array in the capture note.
+
+| Coverage Need | Suggested Entry | Expected identifier | Status |
+|---|---|---|---|
+| Action | Append all scene-array children | `ArrayTools::AppendAll` | Needs serialized verification |
+| Condition | Scene array has string | `ArrayTools::HasString` | Needs serialized verification |
+| Expression | Sum of scene number array | `ArrayTools::Sum(...)` | Needs serialized verification |
+| ExpressionAndCondition | Index of number | `ArrayTools::IndexOf(...)` | Needs serialized verification |
+| StringExpression | Join scene string array | `ArrayTools::Join(...)` | Needs serialized verification |
+| Object variables | Append all object-array children | `ArrayTools::ObjectAppendAll` | Needs serialized verification |
+| Global variables | Append all global-array children | `ArrayTools::GlobalAppendAll` | Needs serialized verification |
+
+Minimum useful GDevelop examples:
+
+- one scene-variable action, condition, expression, expression-and-condition,
+  and string expression
+- one object-variable entry that includes two object/object-variable pairs
+- one global-variable entry
+
+If any generated JSON disagrees with the source-derived order below, keep the
+generated JSON as evidence and update this file rather than guessing.
 
 ## Documentation Parity Notes
 
@@ -40,10 +134,23 @@ Current project evidence (Dark-Ship-Codex):
   - `ArrayTools::HasString`
   - `ArrayTools::Shift`
 
+Current local validation project:
+- `C:\\GameDev\\AI-Playground` is available for generating examples on demand.
+- ArrayTools is installed using the preferred split extension shape:
+  - project reference: `/eventsFunctionsExtensions/arraytools`
+  - split file: `C:\\GameDev\\AI-Playground\\eventsFunctionsExtensions\\arraytools.json`
+- Serialized usage is present in `AI Playground.json` for:
+  - `ArrayTools::HasNumber`
+  - `ArrayTools::Reverse`
+- HTML5 export with gdexporter and Playwright smoke passed after conversion to
+  the split install shape.
+
 Practical rule:
 - Treat export metadata as the primary catalog/signature source.
 - Use docs technical notes to annotate hidden/internal parameter positions and
   confirm exact JSON `type.value` naming patterns.
+- Ask the user for a generated GDevelop project JSON example whenever exact
+  serialized parameter order is needed for implementation.
 
 ## Function Catalog
 

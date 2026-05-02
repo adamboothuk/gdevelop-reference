@@ -19,6 +19,12 @@ Copy this template to a new file when starting an extension, for example:
 - Editor capture location (project/scene/event):
 - JSON sample file path:
 - GDevelop source link (optional):
+- Wiki documentation link:
+- Extension install shape:
+  - [ ] Split `eventsFunctionsExtensions/<extension>.json` file (preferred)
+  - [ ] Inline `eventsFunctionsExtensions` object in project JSON
+  - [ ] Inline install used with documented reason:
+  - [ ] Not checked
 
 ## Verified Entries
 
@@ -54,6 +60,10 @@ properties from behavior `propertyDescriptors`.
 - Deprecated names:
 - Behavior-scoped naming rules:
 - Missing items to verify:
+- Test/validation result:
+  - [ ] Static source metadata only
+  - [ ] Saved project JSON serialization checked
+  - [ ] GDevelop/editor or preview behavior checked
 
 ## Ready For Reference File?
 
@@ -61,5 +71,7 @@ properties from behavior `propertyDescriptors`.
 - [ ] Parameter order validated
 - [ ] Behavior modifiers captured (if behavior-based extension)
 - [ ] Runtime impact of modifiers checked in inline code (`_get...()` usage)
+- [ ] Install shape documented
+- [ ] Saved project JSON evidence captured, or gap explicitly recorded
 - [ ] Evidence links or file paths recorded
 - [ ] Safe to draft `references/extensions/<extension-name>.md`

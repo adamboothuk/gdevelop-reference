@@ -17,7 +17,8 @@ See `docs/extension-targets.md` for backlog and status.
 | Extension | Status | Reference |
 |---|---|---|
 | Sticker | Verified | `references/extensions/sticker.md` |
-| ArrayTools | Capturing | `references/extensions/arraytools.md` |
+| ArrayTools | Drafted | `references/extensions/arraytools.md` |
+| FireBullet | Drafted | `references/extensions/fire-bullet.md` |
 
 ## File Naming
 

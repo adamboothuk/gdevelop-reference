@@ -5,8 +5,15 @@ __pycache__/
 .venv/
 venv/
 
+# Node/test artifacts
+node_modules/
+test-results/
+playwright-report/
+
 # OS/editor noise
 .DS_Store
 Thumbs.db
 .vscode/
 
+# Local Backlog.md planning space for extension-reference work.
+extension-backlog/
